@@ -20,10 +20,10 @@ Product.init(
       allowNull: false,
     },
     price: {
-      type: DataTypes.FLOAT, // TODO: Decimal? Float?
+      type: DataTypes.DECIMAL(10,2),
       allowNull: false,
       validate: {
-        isFloat: true, // TODO: Validates that the value is a decimal
+        isDecimal: true,
       },
     },
     stock: {
@@ -36,7 +36,10 @@ Product.init(
     },
     category_id: {
       type: DataTypes.INTEGER,
-      // TODO: References the category model's id
+      references: {
+        model: 'category',
+        key: 'id',
+      },
     }
   },
   {
