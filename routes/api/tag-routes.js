@@ -31,8 +31,21 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', (req, res) => {
-  // create a new tag
+// create a new tag
+router.post('/', async (req, res) => {
+  /* req.body should look like this...
+    {
+      "tag_name": "wooden bats"
+    }
+  */
+  try {
+    if (req.body.tag_name) {
+      const newTag = await Tag.create(req.body);
+      res.status(200).json(newTag);
+    }
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
 
 router.put('/:id', (req, res) => {
