@@ -39,12 +39,12 @@ router.post('/', async (req, res) => {
     }
   */
   try {
-    if (req.body.category_name) {
+    if (req.body) {
       const newCategory = await Category.create(req.body);
       res.status(200).json(newCategory);
     }
   } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json(err);
   }
 });
 
